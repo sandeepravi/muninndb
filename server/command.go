@@ -19,6 +19,9 @@ func SetupCommands() {
 
 	// integer
 	registerCmd("INCR", kvincr)
+	registerCmd("INCRBY", kvincrby)
+	registerCmd("DECR", kvdecr)
+	registerCmd("DECRBY", kvdecrby)
 }
 
 func registerCmd(name string, f func(c *Client)) {

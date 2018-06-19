@@ -23,10 +23,31 @@ func kvget(c *Client) {
 }
 
 func kvincr(c *Client) {
+	incdecby(c, "1", "+")
+}
+
+func kvincrby(c *Client) {
+	incdecby(c, c.Args[2], "+")
+}
+
+func kvdecr(c *Client) {
+	incdecby(c, "1", "-")
+}
+
+func kvdecrby(c *Client) {
+	incdecby(c, c.Args[2], "-")
+}
+
+func incdecby(c *Client, b string, op string) {
 	v, ok := c.DB.Get(c.Args[1])
 	var i int
+	n, err := strconv.Atoi(b)
+	if err != nil {
+		c.RespTypeError()
+		return
+	}
 	if !ok {
-		i = 1
+		i = n
 	} else {
 		switch s := v.(type) {
 		default:
@@ -39,7 +60,11 @@ func kvincr(c *Client) {
 				c.RespTypeError()
 				return
 			}
-			i += int(1)
+			if op == "+" {
+				i += int(n)
+			} else {
+				i -= int(n)
+			}
 		}
 	}
 	c.DB.Update(c.Args[1], strconv.Itoa(i))

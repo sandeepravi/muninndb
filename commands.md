@@ -6,10 +6,10 @@
 
 ##### Integer
 - [X] INCR
-- [ ] INCRBY
+- [X] INCRBY
 - [ ] INCRBYFLOAT
-- [ ] DECR
-- [ ] DECRBY
+- [X] DECR
+- [X] DECRBY
 - [ ] DECRBYFLOAT (NOT IN REDIS)
 
 ##### Bitwise
