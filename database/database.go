@@ -27,3 +27,13 @@ func (db *DB) Get(key string) (interface{}, bool) {
 	}
 	return item.value, true
 }
+
+func (db *DB) Update(key string, value interface{}) {
+	item, ok := db.items[key]
+	if !ok {
+		db.Set(key, value)
+	} else {
+		item.value = value
+		db.items[key] = item
+	}
+}

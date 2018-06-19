@@ -36,3 +36,7 @@ func (c *Client) RespNull() {
 func (c *Client) RespTypeError() {
 	c.RespUniqueError("WRONGTYPE Operation against a key holding the wrong kind of value")
 }
+
+func (c *Client) RespInt(n int) {
+	io.WriteString(c.w, ":"+strconv.FormatInt(int64(n), 10)+"\r\n")
+}

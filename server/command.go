@@ -13,8 +13,12 @@ type Command struct {
 }
 
 func SetupCommands() {
+	// String
 	registerCmd("SET", kvset)
 	registerCmd("GET", kvget)
+
+	// integer
+	registerCmd("INCR", kvincr)
 }
 
 func registerCmd(name string, f func(c *Client)) {
